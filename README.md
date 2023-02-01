@@ -1,5 +1,5 @@
 # 3DSGrasp: 3D Shape-Completion for Robotic Grasp 
-(paper submitted to ICRA 2023)
+(paper accepted for presentation at ICRA 2023)
 
 ## Tested on 
 Ubuntu 20.04 and with ROS Noetic
