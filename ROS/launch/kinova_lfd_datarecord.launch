@@ -1,0 +1,8 @@
+<launch>
+    <!-- Robot namespace -->
+    <arg name="robot_name" default="my_gen3"/>
+    <arg name="start_delay_seconds" default="0"/>
+
+    <!-- Launch the example in that namespace -->
+    <node name="kinova_lfd" pkg="kortex_examples" type="kinova_lfd_datarecord.py" ns="$(arg robot_name)" output="screen" launch-prefix="bash -c 'sleep $(arg start_delay_seconds); $0 $@' "/> 
+</launch>

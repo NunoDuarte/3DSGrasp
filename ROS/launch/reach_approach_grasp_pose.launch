@@ -1,0 +1,8 @@
+<launch>
+    <!-- Robot namespace -->
+    <arg name="robot_name" default="my_gen3"/>
+    <arg name="start_delay_seconds" default="0"/>
+
+    <!-- Launch the example in that namespace -->
+    <node name="reach_grasp_pose" pkg="kortex_examples" type="reach_approach_grasp_pose.py" ns="$(arg robot_name)" output="screen" launch-prefix="bash -c 'sleep $(arg start_delay_seconds); $0 $@' "/> 
+</launch>
