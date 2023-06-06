@@ -1,4 +1,7 @@
 # 3DSGrasp
+
+![Language grade: Python](https://img.shields.io/badge/python-3.7%20-brightgreen)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 IEEE ICRA 2023 - [<b>3DSGrasp: 3D Shape-Completion for Robotic Grasp </b>](https://arxiv.org/abs/2301.00866)
 
 ## Tested on 
