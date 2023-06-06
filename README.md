@@ -9,10 +9,10 @@ We present a grasping strategy, named 3DSGrasp, that predicts the missing geomet
 <img src="media/first_gif.gif" width="400" height="225" /> <img src="media/second_gif.gif" width="400" height="225" />
 
 # :computer:  Quick Start
-:arrow_heading_down: <b>If you want to:</b>
-- run the full pipeline goto [Pipeline](#page_facing_up-step-by-step-of-3dsgrasp)
-- run the completion network only goto [Completion Network](#completion-network)
-- run only GPD for point cloud data either partial.pc or complete.pc goto [GPD](#gpd-for-point-cloud)
+:arrow_heading_down: <b>After installing follow the appropriate instructions if you want to:</b>
+- run the full pipeline :arrow_right: [Full Pipeline](#page_facing_up-step-by-step-of-3dsgrasp)
+- run the completion network only :arrow_right: [Completion Network](#completion-network)
+- run only GPD for point cloud data either partial.pc or complete.pc :arrow_right: [Test GPD](#gpd-for-point-cloud)
 
 To begin, clone this repository locally
 ```bash
@@ -21,7 +21,7 @@ $ export 3DSG_ROOT=$(pwd)/3DSGrasp
 ```
 This repo was tested on Ubuntu 20.04 and with ROS Noetic
 
-## Install requirements for completion network:
+## Install requirements for Completion Network:
 ```bash
 $ cd $3DSG_ROOT
 $ conda create -n 3dsg_venv python=3.8  # or use virtualenv
@@ -36,10 +36,10 @@ $ sh install.sh
 ```bash
 sudo apt install ros-noetic-moveit
 ```
-- Check oficial documentation for [GPD](https://github.com/atenpas/gpd) (Note that gpd repo was tested on Ubuntu 16.04; if you trouble installing on Ubuntu 20.04 send an issue to us and we'll help)
+- Check oficial documentation for [GPD](https://github.com/atenpas/gpd) (:warning: gpd repo was tested on Ubuntu 16.04; if you trouble installing on Ubuntu 20.04 send an issue to us and we'll help)
 
 ## Install GPD to test see grasps generated of your partial.pc or complete.pc 
-- Check oficial documentation for [GPD](https://github.com/atenpas/gpd) (Note that gpd repo was tested on Ubuntu 16.04; if you trouble installing on Ubuntu 20.04 send an issue to us and we'll help)
+- Check oficial documentation for [GPD](https://github.com/atenpas/gpd) (:warning: gpd repo was tested on Ubuntu 16.04; if you trouble installing on Ubuntu 20.04 send an issue to us and we'll help)
 
 # :page_facing_up: Step by step of 3DSGrasp
 Open terminals:
