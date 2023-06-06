@@ -25,22 +25,11 @@ $ sh install.sh
 ```
 
 If you want to:
-- run the full pipeline goto [Pipeline](#step-by-step-of-3dsgrasp)
+- run the full pipeline goto [Pipeline](#page_facing_up-step-by-step-of-3dsgrasp)
 - run the completion network only goto [Completion Network](#completion-network)
 - run only GPD for point cloud data either partial.pc or complete.pc goto [GPD](#gpd-for-point-cloud)
 
-# :page_facing_up: Dependencies
-- OpenCV 
-- pylsl
-- numpy
-- os
-- math
-- msgpack
-- zmq
-- Tensorflow with CUDA
-	- CUDA 11.2; Tensorflow 2.7; Cudnn v8.1; nvidia driver 460.32 (for RTX 3090)
-
-# Step by step of 3DSGrasp
+# :page_facing_up: Step by step of 3DSGrasp
 Open terminals:
 1. ROS KINOVA
 ```bash
