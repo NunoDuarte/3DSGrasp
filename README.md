@@ -50,78 +50,64 @@ roslaunch kortex_driver kortex_driver.launch
 ```
 (optional) import rviz environment and/or table for collision detection
 ```
-open config file ~/Documents/kinova_grasping/grasp_kinova.rviz
-go to scene objects -> import -> ~/Documents/kinova_grasping/table -> Publish
+open config file 3DSG_ROOT/ROS/rviz/grasp_kinova.rviz
+go to scene objects -> import -> 3DSG_ROOT/ROS/rviz/my_table -> Publish
 ```
-2. ROS KINOVA CAMERA
+2. ROS KINOVA VISION
 ```bash
 source catkin/devel/setup.bash
-roslaunch kinova_vision kinova_vision_rgbd.launch device:=10.0.3.26
+roslaunch kinova_vision kinova_vision_rgbd.launch device:=$IP_KINOVA
 ```
-If robot is not in initial position do this, otherwise skip 
+3. Configure kinova and gpd files
+set an initial pose for kinova manually or (optional) set it as a .npy file and load it in reach_approach_grasp_pose.py
+```bash
+cd 3DSG_ROOT/ROS/src/
+```
+(optional) open reach_approach_grasp_pose.py and set location of initial_state.npy of kinova 
+```python
+        # Load initial state of robot (joint angles)
+        initial_state = np.load('location_of_initial_state.npy')
+```
+set location of final_pose.npy and final_approach.npy (These are the best grasp and approach from GPD)
+```python
+        print('Load grasp pose')
+        final_pose = np.load('location_of_final_pose.npy')
+        final_approach = np.load('location_of_final_approach.npy')
+```
+4. RUN PIPELINE
+```
+source catkin_ws/devel/setup.bash
+cd 3DSG_ROOT/
+python main_gpd.py
+```
+if segmentation fails (partial point cloud includes artifacts then "quit every plot; imediately ctrl c (multiple times), wait to close, run again"
+
+5. RUN ON KINOVA
 ```bash
 source catkin/devel/setup.bash
 roslaunch kortex_examples reach_approach_grasp_pose.launch
 ```
-In the terminal answer to the prompted questions
-```
-initial pose? y
-CTR+C
-```
-3. COMPUTE GRASPS FROM POINT CLOUD
-```
-source catkin_ws/devel/setup.bash
-cd ~/Documents/kinova_grasping
-python main_agile.py
-```
-if segmentation fails:
-"quit every plot; imediately ctrl c (multiple times), wait to close, run again until it works"
 
 # :information_source: Information:
-1. to change closure of gripper:
+- When grasping the closure of the gripper is predefine, if you want to change it is
 ```
-in /home/nuno/catkin_ws_kortex/src/ros_kortex/kortex_examples/src/move_it/reach_approach_grasp_pose.py
+in reach_approach_grasp_pose.py
 change the variable approach.example_send_gripper_command(0.3)
 ```
-to change gripper size:
-```
-in/home/nuno/catkin_ws/src/agile_grasp/src/nodes/find_grasps.cpp
-change these variable: const double HAND_OUTER_DIAMETER = 0.20;
-```
-then compile
-```bash
-cd /home/nuno/catkin_ws
-catkin_make
-```
-2. For acquiring the point cloud and segmenting it run:
+
+- For acquiring the point cloud and segmenting it run:
 ```bash
 python main_agile.py
 ```
-(saves the acquired_point cloud as original_pc and the segmented as partial_pc in tmp_data)
+it saves the acquired_point cloud as original_pc and the segmented as partial_pc in tmp_data
 
-After getting the grasps and copying them in test_grasps_agile.py run:
-```bash
-cd ~/Documents/kinova_grasping
-python test_grasps_agile.py
-```
-(computes the grasp pose in the base frame, publishes it in the goal_frame topic, and saves it in final_pose.npy in tmp_data)
-Finally execute grasp pose in real robot using:
-```bash
-roslaunch kortex_examples reach_grasp_pose.launch 
-```
 
 ### GPD for Point Cloud
+To run GPD on .pcd file 
 ```
-catkin_make -DGPD_LIB=/home/nuno/Documents/third_party/gpd/build/INSTALL/lib/libgpd.so -DGPD_INCLUDE_DIRS=/home/nuno/Documents/third_party/gpd/build/INSTALL/include/
+cd $GPD_ROOT/build
+./detect_grasps ../cfg/eigen_params.cfg $LOCATION_OF_FILE.PCD 
 ```
-
-# Add documentation on how to run:
-- [ ] model
-- [ ] kinova
-- [ ] gpd
-- [ ] moveit
-- [ ] instruction to run complete pipeline
-
 
 # :soon: The Dataset and pre-trained model will get released soon 
 # Completion Network
