@@ -1,44 +1,8 @@
 #!/usr/bin/env python
 
-# Software License Agreement (BSD License)
-#
-# Copyright (c) 2013, SRI International
-# All rights reserved.
-#
-# Redistribution and use in source and binary forms, with or without
-# modification, are permitted provided that the following conditions
-# are met:
-#
-#  * Redistributions of source code must retain the above copyright
-#    notice, this list of conditions and the following disclaimer.
-#  * Redistributions in binary form must reproduce the above
-#    copyright notice, this list of conditions and the following
-#    disclaimer in the documentation and/or other materials provided
-#    with the distribution.
-#  * Neither the name of SRI International nor the names of its
-#    contributors may be used to endorse or promote products derived
-#    from this software without specific prior written permission.
-#
-# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-# "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-# LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
-# FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
-# COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-# INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
-# BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
-# LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-# CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
-# LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
-# ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-# POSSIBILITY OF SUCH DAMAGE.
-#
-# Author: Acorn Pooley, Mike Lautman
-
-# Inspired from http://docs.ros.org/kinetic/api/moveit_tutorials/html/doc/move_group_python_interface/move_group_python_interface_tutorial.html
-# Modified by Alexandre Vannobel to test the FollowJointTrajectory Action Server for the Kinova Gen3 robot
-
-# To run this node in a given namespace with rosrun (for example 'my_gen3'), start a Kortex driver and then run : 
-# rosrun kortex_examples example_moveit_trajectories.py __ns:=my_gen3
+# insert the location of the second file or put it in the same local folder
+# sys.path.insert(1, 'location_of_approach_object_movement.py')
+from approach_object_movement import Approach_Object
 
 import sys
 import time
@@ -52,10 +16,6 @@ import rospy
 from std_msgs.msg import String
 import tf2_ros
 import numpy as np
-
-# insert at 1, 0 is the script path (or '' in REPL)
-sys.path.insert(1, '/home/nuno/catkin_ws_kortex/src/ros_kortex/kortex_examples/src/full_arm/')
-from approach_object_movement import Approach_Object
 
 
 class ExampleMoveItTrajectories(object):
@@ -121,22 +81,6 @@ class ExampleMoveItTrajectories(object):
         # Set the goal joint tolerance
         self.arm_group.set_goal_joint_tolerance(tolerance)
 
-        # Set the joint target configuration
-        # if self.degrees_of_freedom == 7:
-        #  joint_positions[0] = pi/2
-        #  joint_positions[1] = 0
-        #  joint_positions[2] = pi/4
-        #  joint_positions[3] = -pi/4
-        #  joint_positions[4] = 0
-        #  joint_positions[5] = pi/2
-        #  joint_positions[6] = 0.2
-        # elif self.degrees_of_freedom == 6:
-        #  joint_positions[0] = 0
-        #  joint_positions[1] = 0
-        #  joint_positions[2] = pi/2
-        #  joint_positions[3] = pi/4
-        #  joint_positions[4] = 0
-        #  joint_positions[5] = pi/2
         arm_group.set_joint_value_target(joint_positions)
 
         # Plan and execute in one command
@@ -244,7 +188,7 @@ def main():
 
     if success:
         # Load initial state of robot (joint angles)
-        initial_state = np.load('/home/nuno/Documents/kinova_grasping/tmp_data/initial_state_4.npy') 	# gripper
+        initial_state = np.load('/home/nuno/Documents/kinova_grasping/tmp_data/initial_state_4.npy') 	 # gripper
         initial_state = list(initial_state)
         print('Loaded initial state: ', initial_state)
 
