@@ -27,7 +27,7 @@ $ sh install.sh
 If you want to:
 - run the full pipeline goto [Pipeline](#step-by-step-of-3dsgrasp)
 - run the completion network only goto [Completion Network](#completion-network)
-- run only GPD for point cloud data either partial.pc or complete.pc goto [Completion Network](#gpd-for-point-cloud)
+- run only GPD for point cloud data either partial.pc or complete.pc goto [GPD](#gpd-for-point-cloud)
 
 # :page_facing_up: Dependencies
 - OpenCV 
