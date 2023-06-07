@@ -89,10 +89,9 @@ roslaunch kortex_examples reach_approach_grasp_pose.launch
 ```
 
 # :information_source: Information:
-- When grasping the closure of the gripper is predefine, if you want to change it is
-```
-in reach_approach_grasp_pose.py
-change the variable approach.example_send_gripper_command(0.3)
+- When grasping the closure of the gripper is predefine, if you want to change open ```reach_approach_grasp_pose.py``` and change variable
+```  python
+approach.example_send_gripper_command(0.3)
 ```
 
 - For acquiring the point cloud and segmenting it run:
