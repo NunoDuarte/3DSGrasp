@@ -10,7 +10,7 @@ We present a grasping strategy, named 3DSGrasp, that predicts the missing geomet
 
 # :computer:  Quick Start
 :arrow_heading_down: <b>After installing follow the appropriate instructions if you want to:</b>
-- run the full pipeline (from camera depth input to kinova grasping the object) :arrow_right: [Full Pipeline](#page_facing_up-step-by-step-of-3dsgrasp)
+- run the full pipeline (from camera depth input to kinova grasping the object) :arrow_right: [Full Pipeline](#page_facing_up-step-by-step-of-3dsgrasp-pipeline)
 - run only the completion network to generate shape completion on a partial.pc :arrow_right: [Completion Network](#completion-network)
 - run only GPD to generate grasp candidates for point cloud data of either partial.pc or complete.pc :arrow_right: [Test GPD](#gpd-for-point-cloud)
 
@@ -41,7 +41,7 @@ sudo apt install ros-noetic-moveit
 ## Install GPD to test see grasps generated of your partial.pc or complete.pc 
 - Check oficial documentation for [GPD](https://github.com/atenpas/gpd) (:warning: gpd repo was tested on Ubuntu 16.04; if you trouble installing on Ubuntu 20.04 send an issue to us and we'll help)
 
-# :page_facing_up: Step by step of 3DSGrasp
+# :page_facing_up: Step by step of 3DSGrasp Pipeline
 Open terminals:
 1. ROS KINOVA
 ```bash
