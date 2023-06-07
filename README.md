@@ -101,7 +101,7 @@ python main_agile.py
 it saves the acquired_point cloud as original_pc and the segmented as partial_pc in tmp_data
 
 
-### GPD for Point Cloud
+# :page_facing_up: GPD for Point Cloud
 To run GPD on .pcd file 
 ```
 cd $GPD_ROOT/build
