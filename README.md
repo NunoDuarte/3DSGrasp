@@ -109,7 +109,8 @@ cd $GPD_ROOT/build
 ```
 
 # :soon: The Dataset and pre-trained model will get released soon 
-# Completion Network
+## Completion Network
+The pre-trained model of our Completion Network used in 3DSGrasp can be downloaded [here](https://drive.google.com/file/d/11vTsY0MQw9pzsqz3MyvCKjQT2rQ9VxVi/view?usp=share_link) (around 500 MB)
 
 ## Citation 
 If you find this code useful in your research, please consider citing our [paper](https://arxiv.org/abs/2301.00866):
