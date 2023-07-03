@@ -14,6 +14,7 @@ We present a grasping strategy, named 3DSGrasp, that predicts the missing geomet
 - run only the completion network to generate shape completion on a partial.pc :arrow_right: [Completion Network](#completion-network)
 - run only GPD to generate grasp candidates for point cloud data of either partial.pc or complete.pc :arrow_right: [Test GPD](#page_facing_up-gpd-for-point-cloud)
 
+# :key: Installations
 To begin, clone this repository locally
 ```bash
 git clone git@github.com:NunoDuarte/3DSGrasp.git
@@ -21,7 +22,7 @@ $ export 3DSG_ROOT=$(pwd)/3DSGrasp
 ```
 This repo was tested on Ubuntu 20.04 and with ROS Noetic
 
-## Install requirements for Completion Network:
+## :key: Install requirements for Completion Network:
 ```bash
 $ cd $3DSG_ROOT
 $ conda create -n 3dsg_venv python=3.8  # or use virtualenv
@@ -29,7 +30,7 @@ $ conda activate 3dsg_venv
 $ sh install.sh
 ```
 
-## Install ROS, ROS_kortex + ROS_kortex_vision (Kinova gen3), Moveit, GPD for full Pipeline
+## :key: Install requirements for full Pipeline
 - Check oficial documentation for [ROS](http://wiki.ros.org/noetic/Installation/Ubuntu)
 - Check oficial documentation for [ROS_kortex](https://github.com/Kinovarobotics/ros_kortex) and [ROS_kortex_vision](https://github.com/Kinovarobotics/ros_kortex_vision)
 - Check oficial documentation for [Moveit](https://moveit.ros.org/install/) or just do this 
@@ -38,10 +39,10 @@ sudo apt install ros-noetic-moveit
 ```
 - Check oficial documentation for [GPD](https://github.com/atenpas/gpd) (:warning: gpd repo was tested on Ubuntu 16.04; if you have trouble installing on Ubuntu 20.04 send an issue to us and we'll help)
 
-## Install GPD to test see grasps generated of your partial.pc or complete.pc 
+## :key: Install requirements to test GPD (see grasps generated of your partial.pc or complete.pc)
 - Check oficial documentation for [GPD](https://github.com/atenpas/gpd) (:warning: gpd repo was tested on Ubuntu 16.04; if you have trouble installing on Ubuntu 20.04 send an issue to us and we'll help)
 
-# :page_facing_up: Step by step of 3DSGrasp Pipeline
+# :page_facing_up: Step by step to run 3DSGrasp Pipeline
 Open terminals:
 1. ROS KINOVA
 ```bash
