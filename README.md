@@ -36,10 +36,10 @@ $ sh install.sh
 ```bash
 sudo apt install ros-noetic-moveit
 ```
-- Check oficial documentation for [GPD](https://github.com/atenpas/gpd) (:warning: gpd repo was tested on Ubuntu 16.04; if you trouble installing on Ubuntu 20.04 send an issue to us and we'll help)
+- Check oficial documentation for [GPD](https://github.com/atenpas/gpd) (:warning: gpd repo was tested on Ubuntu 16.04; if you have trouble installing on Ubuntu 20.04 send an issue to us and we'll help)
 
 ## Install GPD to test see grasps generated of your partial.pc or complete.pc 
-- Check oficial documentation for [GPD](https://github.com/atenpas/gpd) (:warning: gpd repo was tested on Ubuntu 16.04; if you trouble installing on Ubuntu 20.04 send an issue to us and we'll help)
+- Check oficial documentation for [GPD](https://github.com/atenpas/gpd) (:warning: gpd repo was tested on Ubuntu 16.04; if you have trouble installing on Ubuntu 20.04 send an issue to us and we'll help)
 
 # :page_facing_up: Step by step of 3DSGrasp Pipeline
 Open terminals:
