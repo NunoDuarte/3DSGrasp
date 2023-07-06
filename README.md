@@ -119,10 +119,14 @@ The pre-trained model of our Completion Network used in 3DSGrasp
 ## Citation 
 If you find this code useful in your research, please consider citing our [paper](https://arxiv.org/abs/2301.00866):
 ```bibtex
-@article{mohammadi20233dsgrasp,
-  title={3DSGrasp: 3D Shape-Completion for Robotic Grasp},
-  author={Mohammadi, Seyed S and Duarte, Nuno F and Dimou, Dimitris and Wang, Yiming and Taiana, Matteo and Morerio, Pietro and Dehban, Atabak and Moreno, Plinio and Bernardino, Alexandre and Del Bue, Alessio and others},
-  journal={arXiv preprint arXiv:2301.00866},
-  year={2023}
+@INPROCEEDINGS{10160350,
+  author={Mohammadi, Seyed S. and Duarte, Nuno F. and Dimou, Dimitrios and Wang, Yiming and Taiana, Matteo and Morerio, Pietro and Dehban, Atabak and Moreno, Plinio and Bernardino, Alexandre and Del Bue, Alessio and Santos-Victor, José},
+  booktitle={2023 IEEE International Conference on Robotics and Automation (ICRA)}, 
+  title={3DSGrasp: 3D Shape-Completion for Robotic Grasp}, 
+  year={2023},
+  volume={},
+  number={},
+  pages={3815-3822},
+  doi={10.1109/ICRA48891.2023.10160350}
 }
 ```
