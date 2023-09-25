@@ -4,18 +4,19 @@ import os
 from tools import builder
 from utils import dist_utils
 import time
-from utils.logger import *
+#from utils.logger import *
 from utils.AverageMeter import AverageMeter
 from utils.metrics import Metrics
 from extensions.chamfer_dist import ChamferDistanceL1, ChamferDistanceL2
 import numpy as np
 from tqdm import tqdm
 from torch.utils.data import DataLoader
-from Data_loader_ycb import YcbTest, YcbTrain, YcbVal
-import wandb
+from utils.Data_loader_ycb import YcbTest, YcbTrain, YcbVal
+#import wandb
 
-wandb.login(key='48bec8ea88e37e786af2a8b6d7310dc09d4f4f1f')
-wandb.init(project="Journal_icra", entity="smohammadi89")
+#wandb.login(key='48bec8ea88e37e786af2a8b6d7310dc09d4f4f1f')
+#wandb.init(project="Journal_icra", entity="smohammadi89")
+
 
 def farthest_point_sample(point, npoint):
     """
@@ -41,23 +42,23 @@ def farthest_point_sample(point, npoint):
     return point
 
 
-Test_data_dir = '/media/1TB Hard Disk/ycb_final_pietro/input/*/test'
-Test_pcd_dir = '/media/1TB Hard Disk/ycb_final_pietro/gt'
+Test_data_dir = '/media/nuno/Data/datasets/completionPCD/input/*/test'
+Test_pcd_dir = '/media/nuno/Data/datasets/completionPCD/gt'
 Train_pcd_dir = '/media/1TB Hard Disk/ycb_final_pietro/gt'
 Train_data_dir = '/media/1TB Hard Disk/ycb_final_pietro/input/*/train'
 
 
-test_data = YcbTest(Test_data_dir, Test_pcd_dir)
+test_data = YcbTest(Test_data_dir, Test_pcd_dir, test_mode=True)
 train_data = YcbTrain(Train_data_dir, Train_pcd_dir)
 
 test_loader = torch.utils.data.DataLoader(test_data, batch_size=2, shuffle=False, num_workers=8)
-train_loader = torch.utils.data.DataLoader(train_data, batch_size=2, shuffle=True, num_workers=16)
+#train_loader = torch.utils.data.DataLoader(train_data, batch_size=2, shuffle=True, num_workers=16)
 
 
 def run_net(args, config, train_writer=None, val_writer=None):
     logger = get_logger(args.log_name)
     _model = builder.model_builder(config.model)
-    wandb.watch(_model)
+    #wandb.watch(_model)
 
     _model.to(args.local_rank)
     start_epoch = 0
@@ -121,8 +122,8 @@ def run_net(args, config, train_writer=None, val_writer=None):
         else:
             scheduler.step(epoch)
         if train_writer is not None:
-            wandb.log({'Loss/Epoch/Sparse': losses.avg(0), 'Epoch': epoch})
-            wandb.log({'Loss/Epoch/Dense': losses.avg(1), 'Epoch': epoch})
+            #wandb.log({'Loss/Epoch/Sparse': losses.avg(0), 'Epoch': epoch})
+            #wandb.log({'Loss/Epoch/Dense': losses.avg(1), 'Epoch': epoch})
 
 
             metrics = validate(_model, test_loader, epoch, ChamferDisL1, ChamferDisL2, val_writer, args, config,
@@ -192,23 +193,21 @@ def validate(_model, test_loader, epoch, ChamferDisL1, ChamferDisL2, val_writer,
         val_writer.add_scalar('Loss/Epoch/Sparse', test_losses.avg(0), epoch)
         val_writer.add_scalar('Loss/Epoch/Dense', test_losses.avg(2), epoch)
 
-        wandb.log({'Test/Loss/Epoch/Sparse': test_losses.avg(0), 'Epoch': epoch})
-        wandb.log({'Test/Loss/Epoch/Dense': test_losses.avg(2), 'Epoch': epoch})
-        wandb.log({'Test/Loss/Epoch/DenseL2': test_losses.avg(3), 'Epoch': epoch})
+        #wandb.log({'Test/Loss/Epoch/Sparse': test_losses.avg(0), 'Epoch': epoch})
+        #wandb.log({'Test/Loss/Epoch/Dense': test_losses.avg(2), 'Epoch': epoch})
+        #wandb.log({'Test/Loss/Epoch/DenseL2': test_losses.avg(3), 'Epoch': epoch})
         print('DenseL2', test_losses.avg(3))
 
     return test_losses.avg(0), test_losses.avg(2), test_losses.avg(3)
 
 
-
-
 def test_net(args, config):
-    logger = get_logger(args.log_name)
-    print_log('Tester start ... ', logger=logger)
+    #logger = get_logger(args.log_name)
+    print('Tester start ... ')
 
 
     _model = builder.model_builder(config.model)
-    builder.load_model(_model, args.ckpts, logger=logger)
+    builder.load_model(_model, args.ckpts)
     if args.use_gpu:
         _model.to(args.local_rank)
 
@@ -220,7 +219,7 @@ def test_net(args, config):
     ChamferDisL1 = ChamferDistanceL1()
     ChamferDisL2 = ChamferDistanceL2()
 
-    test(_model, test_loader, ChamferDisL1, ChamferDisL2, args, config, logger=logger)
+    test(_model, test_loader, ChamferDisL1, ChamferDisL2, args, config)
 
 
 def test(_model, test_loader, ChamferDisL1, ChamferDisL2, args, config, logger=None):
@@ -230,13 +229,19 @@ def test(_model, test_loader, ChamferDisL1, ChamferDisL2, args, config, logger=N
 
         for idx, (data) in enumerate(test_loader):
 
+            print('id', idx)
+            print(data)
+            print(len(data))
             partial = data[0].float().cuda()
             gt = data[1].float().cuda()
             output = _model(partial)
             coarse_points = output[0]
             dense_points = output[1]
 
+            print(len(output))
+            print(dense_points.size())
 
+            print(dense_points.cpu().squeeze().size())
             np.savetxt('recon.xyz', dense_points.cpu().squeeze())
             np.savetxt('gt.xyz', gt.cpu().squeeze())
             np.savetxt('partial.xyz', partial.cpu().squeeze())

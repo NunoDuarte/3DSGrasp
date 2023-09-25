@@ -4,6 +4,7 @@ import torch.utils.data
 import torch
 import os
 
+
 class YcbTrain(torch.utils.data.Dataset):
     def __init__(self, root_dir, pcd_dir, scale_aug=False, rot_aug=False, npoint=1024, test_mode=False):
         self.classnames = ['black_and_decker_lithium_drill_driver']
@@ -27,8 +28,6 @@ class YcbTrain(torch.utils.data.Dataset):
 
             self.filepaths.extend(all_files)
             self.filepaths_gt.extend(all_files_gt)
-
-
 
     def __len__(self):
         return len(self.filepaths)
@@ -70,9 +69,7 @@ class YcbTest(torch.utils.data.Dataset):
         for i in range(len(self.classnames)):
             all_files = sorted(glob.glob(parent_dir + '/' + self.classnames[i] + '/' + set_ + '/*.xyz'))
 
-
             self.filepaths.extend(all_files)
-
 
     def __len__(self):
         return len(self.filepaths)
