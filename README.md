@@ -111,9 +111,9 @@ cd $GPD_ROOT/build
 ./detect_grasps ../cfg/eigen_params.cfg $LOCATION_OF_FILE.PCD 
 ```
 
-# :soon: The Dataset will get released soon as well as proper documentation
 ## :tada: The pre-trained model is [here](https://drive.google.com/file/d/11vTsY0MQw9pzsqz3MyvCKjQT2rQ9VxVi/view?usp=share_link) (around 500 MB)!!!
 ## Completion Network
+### Documentation for how to run Completion network goes here!
 The pre-trained model of our Completion Network used in 3DSGrasp
 
 ## Citation 
