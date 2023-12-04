@@ -9,13 +9,10 @@ import torch
 from tensorboardX import SummaryWriter
 
 def main():
-    # args
     args = parser.get_args()
-    # CUDA
     args.use_gpu = torch.cuda.is_available()
     if args.use_gpu:
         torch.backends.cudnn.benchmark = True
-    # init distributed env first, since logger depends on the dist info.
     if args.launcher == 'none':
         args.distributed = False
     else:

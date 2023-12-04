@@ -28,11 +28,10 @@ def get_knn_index(coor_q, coor_k=None):
         idx = idx + idx_base
         idx = idx.view(-1)
 
-    return idx  # bs*k*np
+    return idx
 
 
 def get_graph_feature(x, knn_index, x_q=None):
-    # x: bs, np, c, knn_index: bs*k*np
     k = 8
     batch_size, num_points, num_dims = x.size()
     num_query = x_q.size(1) if x_q is not None else num_points
@@ -41,7 +40,7 @@ def get_graph_feature(x, knn_index, x_q=None):
     x = x_q if x_q is not None else x
     x = x.view(batch_size, 1, num_query, num_dims).expand(-1, k, -1, -1)
     feature = torch.cat((feature - x, x), dim=-1)
-    return feature  # b k np c
+    return feature
 
 class Folding(nn.Module):
     def __init__(self, in_channel , step , hidden_dim = 512):
@@ -126,9 +125,9 @@ class Attention(nn.Module):
         attn = attn.softmax(dim=-1)
         attn = self.attn_drop(attn)
 
-        xx = (attn @ v).transpose(1, 2).reshape(B, N, C)
+        x = (attn @ v).transpose(1, 2).reshape(B, N, C)
         # Offset-Attention
-        x = x - xx
+        #x = x - xx
 
         x = self.proj(x)
         x = self.proj_drop(x)
@@ -398,7 +397,7 @@ class SGrasp(nn.Module):
 
         self.fold_step = int(pow(self.num_pred//self.num_query, 0.5) + 0.5)
         self.base_model = PCT(in_chans = 3, embed_dim = self.trans_dim, depth = [6, 8], drop_rate = 0., num_query = self.num_query, knn_layer = self.knn_layer)
-        
+
         self.foldingnet = Folding(self.trans_dim, step = self.fold_step, hidden_dim = 256)  # rebuild a cluster point
 
         self.increase_dim = nn.Sequential(
