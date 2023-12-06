@@ -33,13 +33,19 @@ $ sh install.sh
 ```
 
 ## :key: Install requirements for full Pipeline
+1. install ROS, moveit, ros_kortex, and ros_kortex_vision
 - Check oficial documentation for [ROS](http://wiki.ros.org/noetic/Installation/Ubuntu)
-- Check oficial documentation for [ROS_kortex](https://github.com/Kinovarobotics/ros_kortex) and [ROS_kortex_vision](https://github.com/Kinovarobotics/ros_kortex_vision)
 - Check oficial documentation for [Moveit](https://moveit.ros.org/install/) or just do this 
-```bash
-sudo apt install ros-noetic-moveit
-```
+- Check oficial documentation for [ROS_kortex](https://github.com/Kinovarobotics/ros_kortex) and [ROS_kortex_vision](https://github.com/Kinovarobotics/ros_kortex_vision)
+2. install gpd 
 - Check oficial documentation for [GPD](https://github.com/atenpas/gpd) (:warning: gpd repo was tested on Ubuntu 16.04; if you have trouble installing on Ubuntu 20.04 send an issue to us and we'll help)
+3. replace files ```src/gpd/grasp_detector.cpp``` ```src/gpd/util/plot.cpp``` ```include/util/plot.h``` with the ones provides in folder GPD on this repo
+4. add the correct path of your pipeline
+```
+
+```
+
+
 
 ## :key: Install requirements to test GPD (see grasps generated of your partial.pc or complete.pc)
 - Check oficial documentation for [GPD](https://github.com/atenpas/gpd) (:warning: gpd repo was tested on Ubuntu 16.04; if you have trouble installing on Ubuntu 20.04 send an issue to us and we'll help)
@@ -105,7 +111,7 @@ it saves the acquired_point cloud as original_pc and the segmented as partial_pc
 
 
 # :page_facing_up: GPD for Point Cloud
-To run GPD on .pcd file 
+To run GPD on .pcd file
 ```
 cd $GPD_ROOT/build
 ./detect_grasps ../cfg/eigen_params.cfg $LOCATION_OF_FILE.PCD 
