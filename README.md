@@ -13,8 +13,8 @@ We present a grasping strategy, named 3DSGrasp, that predicts the missing geomet
 - run the full pipeline (from camera depth input to kinova grasping the object) :arrow_right: [Full Pipeline](#page_facing_up-step-by-step-of-3dsgrasp-pipeline)
 - run only the completion network to generate shape completion on a partial.pc :arrow_right: [Completion Network](#completion-network)
 - run only GPD to generate grasp candidates for point cloud data of either partial.pc or complete.pc :arrow_right: [Test GPD](#page_facing_up-gpd-for-point-cloud)
-- :train2: use our model? :arrow_right: [Completion Network](#completion-network)
-- :vertical_traffic_light: use the same train-test split of the YCB dataset? :arrow_right: [Completion Network](#completion-network)
+- 🚋 use our model? :arrow_right: [Completion Network](#completion-network)
+- 🚦 use the same train-test split of the YCB dataset? ➡️ [Completion Network](#completion-network)
 
 # :key: Installations
 To begin, clone this repository locally
@@ -91,7 +91,7 @@ source catkin/devel/setup.bash
 roslaunch kortex_examples reach_approach_grasp_pose.launch
 ```
 
-# :information_source: Information:
+# ℹ️ Information:
 - When grasping the closure of the gripper is predefine, if you want to change open ```reach_approach_grasp_pose.py``` and change variable
 ```  python
 approach.example_send_gripper_command(0.3)
@@ -113,7 +113,7 @@ cd $GPD_ROOT/build
 
 
 ## Completion Network
-## :tada: The pre-trained model is [here](https://drive.google.com/file/d/11vTsY0MQw9pzsqz3MyvCKjQT2rQ9VxVi/view?usp=share_link) (around 500 MB)!!!
+### :tada: The pre-trained model is [here](https://drive.google.com/file/d/11vTsY0MQw9pzsqz3MyvCKjQT2rQ9VxVi/view?usp=share_link) (around 500 MB)!!!
 
 To train point cloud completion model  
 ```
@@ -125,7 +125,7 @@ To test point cloud completion model
 ```
 python3 main.py  --test --ckpts /PATH_TO_pre_trained_MODEL/MODEL.pth --config  ./cfgs/YCB_models/SGrasp.yaml
 ```
-** Note that the input of the network for the real-world grasping experiment should be a single sample **
+**Note that the input of the network for the real-world grasping experiment should be a single sample**
 
 
 ## Citation 
