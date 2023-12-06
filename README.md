@@ -113,6 +113,7 @@ cd $GPD_ROOT/build
 
 
 ## Completion Network
+## :tada: The pre-trained model is [here](https://drive.google.com/file/d/11vTsY0MQw9pzsqz3MyvCKjQT2rQ9VxVi/view?usp=share_link) (around 500 MB)!!!
 
 To train point cloud completion model  
 ```
@@ -124,9 +125,8 @@ To test point cloud completion model
 ```
 python3 main.py  --test --ckpts /PATH_TO_pre_trained_MODEL/MODEL.pth --config  ./cfgs/YCB_models/SGrasp.yaml
 ```
-# Note that the input of the network for the real-world grasping experiment should be a single sample
+** Note that the input of the network for the real-world grasping experiment should be a single sample **
 
-## :tada: The pre-trained model is [here](https://drive.google.com/file/d/11vTsY0MQw9pzsqz3MyvCKjQT2rQ9VxVi/view?usp=share_link) (around 500 MB)!!!
 
 ## Citation 
 If you find this code useful in your research, please consider citing our paper. Available on [IEEE Xplore](https://ieeexplore.ieee.org/document/10160350) and [ArXiv](https://arxiv.org/abs/2301.00866):
