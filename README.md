@@ -41,10 +41,10 @@ $ sh install.sh
 - Check oficial documentation for [GPD](https://github.com/atenpas/gpd) (:warning: gpd repo was tested on Ubuntu 16.04; if you have trouble installing on Ubuntu 20.04 send an issue to us and we'll help)
 3. replace files ```src/gpd/grasp_detector.cpp``` ```src/gpd/util/plot.cpp``` ```include/util/plot.h``` with the ones provides in folder GPD on this repo
 4. add the correct path of your pipeline
+```cpp
+  ofstream fw("'PATH_TO_THE_DIR/gpd_grasp_scores.txt", std::ofstream::out);
 ```
-
-```
-
+5. compile GPD again
 
 
 ## :key: Install requirements to test GPD (see grasps generated of your partial.pc or complete.pc)
