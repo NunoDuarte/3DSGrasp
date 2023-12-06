@@ -11,8 +11,8 @@ We present a grasping strategy, named 3DSGrasp, that predicts the missing geomet
 # :computer:  Quick Start
 :arrow_heading_down: <b>After installing follow the appropriate instructions if you want to:</b>
 - run the full pipeline (from camera depth input to kinova grasping the object) :arrow_right: [Full Pipeline](#page_facing_up-step-by-step-of-3dsgrasp-pipeline)
-- run only the completion network to generate shape completion on a partial.pc :arrow_right: [Completion Network](#completion-network)
-- run only GPD to generate grasp candidates for point cloud data of either partial.pc or complete.pc :arrow_right: [Test GPD](#page_facing_up-gpd-for-point-cloud)
+- run only the completion network to generate shape completion on a partial.pcd :arrow_right: [Completion Network](#completion-network)
+- run only GPD to generate grasps for PCD of either partial.pcd or complete.pcd :arrow_right: [Test GPD](#page_facing_up-gpd-for-point-cloud)
 - 🚋 use our model? :arrow_right: [Completion Network](#completion-network)
 - 🚦 use the same train-test split of the YCB dataset? ➡️ [Completion Network](#completion-network)
 
