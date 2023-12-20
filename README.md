@@ -52,22 +52,37 @@ $ sh install.sh
 
 # :page_facing_up: Step by step to run 3DSGrasp Pipeline
 Open terminals:
-1. ROS KINOVA
+1. Open a terminal and start kinova gen3 ros
 ```bash
 source catkin/devel/setup.bash
 roslaunch kortex_driver kortex_driver.launch
 ```
-(optional) import rviz environment and/or table for collision detection
+2. (optional) open our rviz environment in 3DSG_ROOT/ROS/rviz/. It includes our table for moveit
 ```
-open config file 3DSG_ROOT/ROS/rviz/grasp_kinova.rviz
-go to scene objects -> import -> 3DSG_ROOT/ROS/rviz/my_table -> Publish
+open config file grasp_kinova.rviz
 ```
-2. ROS KINOVA VISION
+3. Open a new terminal and start kinova gen 3 intel sense camera ros package
 ```bash
 source catkin/devel/setup.bash
 roslaunch kinova_vision kinova_vision_rgbd.launch device:=$IP_KINOVA
 ```
-3. Configure kinova and gpd files
+4. Place an object on top of the table and in front of the robot. The object should be visible from rviz using the Point Cloud data
+5. Open a new terminal and run main pipeline with GPD
+```
+source catkin_ws/devel/setup.bash
+cd 3DSG_ROOT/
+python main_gpd.py
+```
+5. Windows will pop out showing the progress of segmentation, the completion network, merging the completion output in the scene, and the gpd output on the completion output
+6. After main_gpd.py finishes a ```complete_final_frame ``` appears on rviz. It should be pointing at the object.
+7. Open a new terminal and run the ros node to grasp the object
+```bash
+source catkin/devel/setup.bash
+roslaunch kortex_examples reach_approach_grasp_pose.launch
+```
+8. The node asks first if you want to move the robot to the initial position. If not type "n", otherwise it will bring you to a predefined initial position. You can change this initial position by following the steps in [How to set the initial position of Kinova](#set-initial-position-on-ros-kinova-gen3).
+
+### Set initial position on ros kinova gen3
 set an initial pose for kinova manually or (optional) set it as a .npy file and load it in reach_approach_grasp_pose.py
 ```bash
 cd 3DSG_ROOT/ROS/src/
