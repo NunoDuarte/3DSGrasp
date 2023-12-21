@@ -81,7 +81,10 @@ source catkin/devel/setup.bash
 roslaunch kortex_examples reach_approach_grasp_pose.launch
 ```
 8. The node asks first if you want to move the robot to the initial position. If not type "n", otherwise it will bring you to a predefined initial position. You can change this initial position by following the steps in [How to set the initial position of Kinova](#set-initial-position-on-ros-kinova-gen3)
-9. After the first question, it then asks if you want to execute the grasp pose. Type "y" to execute or "n" to quit. If you press "y" moveit should try to find a feasible path to control the robot to the desired grasp pose. It it fails you should see an output in the terminal of kortex_driver stating ```No solution was found ```. This could be for various reasons: out of reach for the robot; there is an obstacle in the robot's path, or it 
+9. After the first question, it then asks if you want to execute the grasp pose. Type "y" to execute or "n" to quit. If you press "y" moveit should try to find a feasible path to control the robot to the desired grasp pose. It it fails you should see an output in the terminal of kortex_driver stating ```No solution was found ```. This could be for various reasons: out of reach for the robot; there is an obstacle in the robot's path, or moveit timeout before finding a solution. You could try to change to another grasp pose by changing the index of the gpd output in ```main_gpd.py```:
+```
+
+```
 
 ### Set initial position on ros kinova gen3
 set an initial pose for kinova manually or (optional) set it as a .npy file and load it in reach_approach_grasp_pose.py
