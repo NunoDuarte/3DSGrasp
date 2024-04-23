@@ -152,14 +152,12 @@ There are two folders: input (for partials PCD) and gt (for grouth truth PCD). I
 ## Citation 
 If you find this code useful in your research, please consider citing our paper. Available on [IEEE Xplore](https://ieeexplore.ieee.org/document/10160350) and [ArXiv](https://arxiv.org/abs/2301.00866):
 ```bibtex
-@INPROCEEDINGS{10160350,
-  author={Mohammadi, Seyed S. and Duarte, Nuno F. and Dimou, Dimitrios and Wang, Yiming and Taiana, Matteo and Morerio, Pietro and Dehban, Atabak and Moreno, Plinio and Bernardino, Alexandre and Del Bue, Alessio and Santos-Victor, José},
-  booktitle={2023 IEEE International Conference on Robotics and Automation (ICRA)}, 
-  title={3DSGrasp: 3D Shape-Completion for Robotic Grasp}, 
+@inproceedings{mohammadi20233dsgrasp,
+  title={3dsgrasp: 3d shape-completion for robotic grasp},
+  author={Mohammadi, Seyed S and Duarte, Nuno F and Dimou, Dimitrios and Wang, Yiming and Taiana, Matteo and Morerio, Pietro and Dehban, Atabak and Moreno, Plinio and Bernardino, Alexandre and Del Bue, Alessio and others},
+  booktitle={2023 IEEE International Conference on Robotics and Automation (ICRA)},
+  pages={3815--3822},
   year={2023},
-  volume={},
-  number={},
-  pages={3815-3822},
-  doi={10.1109/ICRA48891.2023.10160350}
+  organization={IEEE}
 }
 ```
