@@ -2,7 +2,7 @@
 ![Language grade: Python](https://img.shields.io/badge/python-3.7|3.8%20-brightgreen)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-**NEW PAPER** IEEE iROS 2025 - Measuring Uncertainty in Shape Completion to Improve Grasp Quality
+**NEW PAPER** IEEE iROS 2025 - Measuring Uncertainty in Shape Completion to Improve Grasp Quality - Code will be released soon
 
 IEEE ICRA 2023 - [<b>3DSGrasp: 3D Shape-Completion for Robotic Grasp </b>](https://ieeexplore.ieee.org/document/10160350) [[<b> Youtube Video </b>](https://youtu.be/i_v4EX_Nkls)]
 
