@@ -27,10 +27,11 @@ $ export GRASP_ROOT=$(pwd)/3DSGrasp
 This repo was tested on Ubuntu 20.04 and with ROS Noetic
 
 ## :key: Install requirements for Completion Network:
+I use virtual_env but you can use any prefered python environment 
 ```bash
 $ cd $GRASP_ROOT
-$ conda create -n 3dsg_venv python=3.8  # or use virtualenv
-$ conda activate 3dsg_venv
+$ python3.8 -m venv /PATH/TO/VENV/3dsgrasp_venv 
+$ source /PATH/TO/VENV/3dsgrasp_venv/bin/activate
 $ sh install.sh
 ```
 
