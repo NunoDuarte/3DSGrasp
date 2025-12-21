@@ -28,7 +28,7 @@ This repo was tested on Ubuntu 20.04 and with ROS Noetic
 
 ## :key: Install requirements for Completion Network:
 ```bash
-$ cd $3DSG_ROOT
+$ cd $GRASP_ROOT
 $ conda create -n 3dsg_venv python=3.8  # or use virtualenv
 $ conda activate 3dsg_venv
 $ sh install.sh
