@@ -22,7 +22,7 @@ We present a grasping strategy, named 3DSGrasp, that predicts the missing geomet
 To begin, clone this repository locally
 ```bash
 git clone git@github.com:NunoDuarte/3DSGrasp.git
-$ export 3DSG_ROOT=$(pwd)/3DSGrasp
+$ export $GRASP_ROOT=$(pwd)/3DSGrasp
 ```
 This repo was tested on Ubuntu 20.04 and with ROS Noetic
 
