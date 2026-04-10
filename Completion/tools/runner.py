@@ -263,18 +263,17 @@ def test(base_model, input_file, output_dir, args, config, logger=None):
         partial = torch.tensor(partial)
         partial = partial.float().cuda()
 
-
-
         ret = base_model(partial)
         dense_points = ret[1]
 
         pcd = dense_points.cpu().squeeze()
 
-        pcd_r = pcd * (m + (m / 6))
+        # Adapt point cloud size for online mode (real sense PCD data scale), otherwise un-normalize normally
+        scale = (m + (m / 6)) if getattr(args, 'run_mode', 'online') == 'online' else m
+        pcd_r = pcd * scale
         pcd_r = pcd_r + centroid
-        pcd_x = pcd * (m + (m/6))
+        pcd_x = pcd * scale
         pcd_x = pcd_x + centroid
-
 
         pcdd = o3d.geometry.PointCloud()
         pcdd.points = o3d.utility.Vector3dVector(pcd_r.cpu().numpy())
