@@ -42,10 +42,10 @@ def farthest_point_sample(point, npoint):
 
 
 
-Test_data_dir = 'PATH_TO_THE_FILE/input/*/test'
-Test_pcd_dir = 'PATH_TO_THE_FILE/gt'
-Train_pcd_dir = 'PATH_TO_THE_FILE/gt'
-Train_data_dir = 'PATH_TO_THE_FILE/input/*/train'
+Test_data_dir = '/data/input/*/test'
+Test_pcd_dir = '/data/gt'
+Train_pcd_dir = '/data/gt'
+Train_data_dir = '/data/input/*/train'
 
 
 test_data = YcbTest(Test_data_dir, Test_pcd_dir, test_mode=True)
@@ -218,15 +218,35 @@ def test_net(args, config):
     ChamferDisL1 = ChamferDistanceL1()
     ChamferDisL2 = ChamferDistanceL2()
 
-    test(base_model, ChamferDisL1, ChamferDisL1, ChamferDisL2, args, config, logger=logger)
+    if getattr(args, 'run_mode', 'online') == 'dataset':
+        import glob
+        print_log("[RUN MODE] Processing all .xyz files in the dataset folder.", logger=logger)
+        dataset_dir = getattr(args, 'dataset_dir', '/data/input')
+        xyz_files = glob.glob(os.path.join(dataset_dir, '**', '*.xyz'), recursive=True)
+        print_log(f"Found {len(xyz_files)} .xyz files.", logger=logger)
+        
+        for file_path in tqdm(xyz_files):
+            base_name = os.path.splitext(os.path.basename(file_path))[0]
+            out_dir = os.path.join(args.output_dir, base_name)
+            test(base_model, file_path, out_dir, args, config, logger=logger)
+    else:
+        print_log("[RUN MODE] Testing on online sample.", logger=logger)
+        test(base_model, args.input_pc, args.output_dir, args, config, logger=logger)
 
 
-def test(base_model, test_loader, ChamferDisL1, ChamferDisL2, args, config, logger=None):
+def test(base_model, input_file, output_dir, args, config, logger=None):
     base_model.eval()
 
     with torch.no_grad():
-        #PATH_TO_THE_PARTIAL_DATA. REMEMBER TO CHANGE THE PATH ALSO IN THE MAIN_GPD.PY FILE
-        partial_ = o3d.io.read_point_cloud('PATH_TO_THE_PARTIAL_DATA/partial_pc.pcd')
+        print(f"Reading input from {input_file}")
+        partial_ = o3d.io.read_point_cloud(input_file)
+        
+        # Save loaded geometry as .pcd file for GPD pipeline
+        os.makedirs(output_dir, exist_ok=True)
+        input_pcd_path = os.path.join(output_dir, 'partial_pc.pcd')
+        o3d.io.write_point_cloud(input_pcd_path, partial_)
+        print(f"Saved partial pcd to {input_pcd_path}")
+
         partial_ = np.asarray(partial_.points)
         partial = farthest_point_sample(partial_,2048)
         partial = partial[:,:3]
@@ -255,14 +275,20 @@ def test(base_model, test_loader, ChamferDisL1, ChamferDisL2, args, config, logg
 
 
         pcdd = o3d.geometry.PointCloud()
-        pcdd.points = o3d.utility.Vector3dVector(pcd_r.cpu().squeeze())
+        pcdd.points = o3d.utility.Vector3dVector(pcd_r.cpu().numpy())
 
-        #PATH_TO_THE_COMPLETED_DATA_REMEMBER TO CHANGE THE PATH ALSO IN THE MAIN_GPD.PY FILE
-        o3d.io.write_point_cloud('PATH_TO_THE_COMPLETED_DATA/complete_pc.pcd',pcdd)
-        np.savetxt('outputfile.xyz', pcd_r.cpu().squeeze())
+        out_path = os.path.join(args.output_dir, 'complete_pc.pcd')
+        o3d.io.write_point_cloud(out_path, pcdd)
+        out_xyz = os.path.join(args.output_dir, 'outputfile.xyz')
+        np.savetxt(out_xyz, pcd_r.cpu().numpy())
+        print(f"Saved complete pcd to {out_path}")
 
         pcddx = o3d.geometry.PointCloud()
-        pcddx.points = o3d.utility.Vector3dVector(pcd_x.cpu().squeeze())
-        o3d.io.write_point_cloud('PATH_TO_THE_COMPLETED_DATA/complete_pc_x.pcd', pcddx)
-        np.savetxt('outputfile.xyz', pcd_x.cpu().squeeze())
+        pcddx.points = o3d.utility.Vector3dVector(pcd_x.cpu().numpy())
+        out_x_path = os.path.join(args.output_dir, 'complete_pc_x.pcd')
+        o3d.io.write_point_cloud(out_x_path, pcddx)
+        out_x_xyz = os.path.join(args.output_dir, 'outputfile_x.xyz')
+        np.savetxt(out_x_xyz, pcd_x.cpu().numpy())
+        print(f"Saved alternative complete pcd to {out_x_path}")
+
 
