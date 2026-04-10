@@ -18,6 +18,28 @@ We present a grasping strategy, named 3DSGrasp, that predicts the missing geomet
 - 🚋 use our model? :arrow_right: [Completion Network](#completion-network)
 - 🚦 use the same train-test split of the YCB dataset? ➡️ [Completion Network](#completion-network)
 
+### :whale: Docker Setup & Execution
+A `Dockerfile` is provided to run the Completion pipeline in an isolated environment. The build step will automatically download the required model and the train/test dataset split.
+
+1. **Build the container:**
+```bash
+docker build -t 3dsgrasp-completion .
+```
+2. **Enter the container interactively:**
+```bash
+docker run --gpus all -it 3dsgrasp-completion
+```
+3. **Execute testing commands:**
+
+   - **A) Online Mode:** To run inference on a specific `.xyz` or `.pcd` pointcloud:
+   ```bash
+   python3 main.py  --test --run_mode online --input_pc PATH_TO_PARTIAL.pcd --output_dir ./out --ckpts /models/3dsgrasp_model.pth --config  ./cfgs/YCB_models/SGrasp.yaml
+   ```
+   - **B) Dataset Mode:** To randomly pick ONE `.xyz` file from the dataset, process it to `.pcd`, run the model, and print the chosen file:
+   ```bash
+   python3 main.py  --test --run_mode dataset --dataset_dir /data/input --output_dir ./out --ckpts /models/3dsgrasp_model.pth --config  ./cfgs/YCB_models/SGrasp.yaml
+   ```
+   
 # :key: Installations
 To begin, clone this repository locally
 ```bash
@@ -151,28 +173,6 @@ python3 main.py  --test --ckpts /PATH_TO_pre_trained_MODEL/MODEL.pth --config  .
 
 ### Our train/test split is avaliable [to download](https://drive.google.com/file/d/1rnJP3Q2zvcj5uImxRu8yYwgk0O7md8dJ/view?usp=drive_link)
 There are two folders: input (for partials PCD) and gt (for grouth truth PCD). Inside each folder there are the objects folders with the train/test split.
-
-### :whale: Docker Setup & Execution
-A `Dockerfile` is provided to run the Completion pipeline in an isolated environment. The build step will automatically download the required model and the train/test dataset split.
-
-1. **Build the container:**
-```bash
-docker build -t 3dsgrasp-completion .
-```
-2. **Enter the container interactively:**
-```bash
-docker run --gpus all -it 3dsgrasp-completion
-```
-3. **Execute testing commands:**
-
-   - **A) Online Mode:** To run inference on a specific `.xyz` or `.pcd` pointcloud:
-   ```bash
-   python3 main.py  --test --run_mode online --input_pc PATH_TO_PARTIAL.pcd --output_dir ./out --ckpts /models/3dsgrasp_model.pth --config  ./cfgs/YCB_models/SGrasp.yaml
-   ```
-   - **B) Dataset Mode:** To randomly pick ONE `.xyz` file from the dataset, process it to `.pcd`, run the model, and print the chosen file:
-   ```bash
-   python3 main.py  --test --run_mode dataset --dataset_dir /data/input --output_dir ./out --ckpts /models/3dsgrasp_model.pth --config  ./cfgs/YCB_models/SGrasp.yaml
-   ```
 
 ## Citation 
 If you find this code useful in your research, please consider citing our paper. Available on [IEEE Xplore](https://ieeexplore.ieee.org/document/10160350) and [ArXiv](https://arxiv.org/abs/2301.00866):
