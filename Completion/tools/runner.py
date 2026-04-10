@@ -40,13 +40,9 @@ def farthest_point_sample(point, npoint):
     return point
 
 
-
-
-Test_data_dir = '/data/input/*/test'
 Test_pcd_dir = '/data/gt'
 Train_pcd_dir = '/data/gt'
 Train_data_dir = '/data/input/*/train'
-
 
 test_data = YcbTest(Test_data_dir, Test_pcd_dir, test_mode=True)
 train_data = YcbTrain(Train_data_dir, Train_pcd_dir)
@@ -220,15 +216,21 @@ def test_net(args, config):
 
     if getattr(args, 'run_mode', 'online') == 'dataset':
         import glob
-        print_log("[RUN MODE] Processing all .xyz files in the dataset folder.", logger=logger)
+        import random
+        print_log("[RUN MODE] Processing a random .xyz file from the dataset folder.", logger=logger)
         dataset_dir = getattr(args, 'dataset_dir', '/data/input')
         xyz_files = glob.glob(os.path.join(dataset_dir, '**', '*.xyz'), recursive=True)
-        print_log(f"Found {len(xyz_files)} .xyz files.", logger=logger)
         
-        for file_path in tqdm(xyz_files):
-            base_name = os.path.splitext(os.path.basename(file_path))[0]
-            out_dir = os.path.join(args.output_dir, base_name)
-            test(base_model, file_path, out_dir, args, config, logger=logger)
+        if not xyz_files:
+            print_log("No .xyz files found in the dataset directory!", logger=logger)
+            return
+
+        file_path = random.choice(xyz_files)
+        print_log(f"Randomly chosen file: {file_path}", logger=logger)
+        
+        base_name = os.path.splitext(os.path.basename(file_path))[0]
+        out_dir = os.path.join(args.output_dir, base_name)
+        test(base_model, file_path, out_dir, args, config, logger=logger)
     else:
         print_log("[RUN MODE] Testing on online sample.", logger=logger)
         test(base_model, args.input_pc, args.output_dir, args, config, logger=logger)
@@ -290,5 +292,4 @@ def test(base_model, input_file, output_dir, args, config, logger=None):
         out_x_xyz = os.path.join(args.output_dir, 'outputfile_x.xyz')
         np.savetxt(out_x_xyz, pcd_x.cpu().numpy())
         print(f"Saved alternative complete pcd to {out_x_path}")
-
 

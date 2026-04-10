@@ -74,4 +74,3 @@ WORKDIR $GRASP_ROOT/Completion
 
 # Default command
 CMD ["/bin/bash"]
-
