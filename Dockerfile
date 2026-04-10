@@ -59,6 +59,8 @@ RUN mkdir -p /data && cd /data && \
     gdown --id 1rnJP3Q2zvcj5uImxRu8yYwgk0O7md8dJ -O dataset.zip && \
     unzip dataset.zip && \
     rm dataset.zip && \
+    for f in $(find . -name "gt.zip"); do cd "$(dirname "$f")" && unzip "$(basename "$f")" && rm "$(basename "$f")" && cd -; done && \
+    for f in $(find . -name "input.zip"); do cd "$(dirname "$f")" && unzip "$(basename "$f")" && rm "$(basename "$f")" && cd -; done && \
     (mv */input . 2>/dev/null || true) && \
     (mv */gt . 2>/dev/null || true)
 
