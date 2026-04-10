@@ -39,7 +39,7 @@ def farthest_point_sample(point, npoint):
     point = point[centroids.astype(np.int32)]
     return point
 
-
+Test_data_dir = '/data/input/*/test'
 Test_pcd_dir = '/data/gt'
 Train_pcd_dir = '/data/gt'
 Train_data_dir = '/data/input/*/train'
