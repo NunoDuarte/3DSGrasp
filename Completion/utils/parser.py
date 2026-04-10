@@ -43,6 +43,26 @@ def get_args():
         default=False, 
         help = 'test mode for certain ckpt')
     parser.add_argument(
+        '--run_mode', 
+        choices=['online', 'dataset'],
+        default='online',
+        help = 'test on online file or dataset')
+    parser.add_argument(
+        '--dataset_dir', 
+        type=str, 
+        default='/data/input',
+        help = 'directory containing the dataset .xyz files')
+    parser.add_argument(
+        '--input_pc', 
+        type=str, 
+        default='PATH_TO_THE_PARTIAL_DATA/partial_pc.pcd',
+        help = 'input online point cloud file path')
+    parser.add_argument(
+        '--output_dir', 
+        type=str, 
+        default='PATH_TO_THE_COMPLETED_DATA',
+        help = 'directory to save the input and output .pcd files')
+    parser.add_argument(
         '--mode', 
         choices=['easy', 'median', 'hard', None],
         default=None,
